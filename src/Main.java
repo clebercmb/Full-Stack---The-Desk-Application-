@@ -1,13 +1,24 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
 
+    private static ArrayList<Integer> arrlist = new ArrayList<Integer>();
+    private static ArrayList<Integer> expenses = new ArrayList<Integer>();
+
     public static void main(String[] args) {
-        /*System.out.println("Hello World!");*/
         System.out.println("\n**************************************\n");
         System.out.println("\tWelcome to TheDesk \n");
         System.out.println("**************************************");
+        expenses.add(1000);
+        expenses.add(2300);
+        expenses.add(45000);
+        expenses.add(32000);
+        expenses.add(110);
+        expenses.addAll(arrlist);
+
         optionsSelection();
 
     }
@@ -25,14 +36,14 @@ public class Main {
             System.out.println(arr[i]);
             // display the all the Strings mentioned in the String array
         }
-        ArrayList<Integer> arrlist = new ArrayList<Integer>();
-        ArrayList<Integer> expenses = new ArrayList<Integer>();
-        expenses.add(1000);
-        expenses.add(2300);
-        expenses.add(45000);
-        expenses.add(32000);
-        expenses.add(110);
-        expenses.addAll(arrlist);
+//        ArrayList<Integer> arrlist = new ArrayList<Integer>();
+//        ArrayList<Integer> expenses = new ArrayList<Integer>();
+//        expenses.add(1000);
+//        expenses.add(2300);
+//        expenses.add(45000);
+//        expenses.add(32000);
+//        expenses.add(110);
+//        expenses.addAll(arrlist);
         System.out.println("\nEnter your choice:\t");
         Scanner sc = new Scanner(System.in);
         int  options =  sc.nextInt();
@@ -84,17 +95,29 @@ public class Main {
             }
         }
 
+        sc.close();
+        sc=null;
+
     }
     private static void closeApp() {
         System.out.println("Closing your application... \nThank you!");
-            }
+    }
     private static void searchExpenses(ArrayList<Integer> arrayList) {
         int leng = arrayList.size();
         System.out.println("Enter the expense you need to search:\t");
         //Complete the method
+        Scanner scan = new Scanner(System.in);
+        int expense = scan.nextInt();
+
+        List<Integer> expenses = arrayList.stream().filter(e->e.equals(expense)).collect(Collectors.toList());
+
+        System.out.println("Expenses found:");
+        System.out.println(expenses);
     }
     private static void sortExpenses(ArrayList<Integer> arrayList) {
         int arrlength =  arrayList.size();
        //Complete the method. The expenses should be sorted in ascending order.
+        arrayList.sort(Integer::compareTo);
+
     }
 }
